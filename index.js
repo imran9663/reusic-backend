@@ -1,20 +1,27 @@
-const express = require('express');
-const JWT = require('jsonwebtoken');
-const mongoose = require('mongoose');
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const dotenv = require("dotenv");
 
-
-const app = express()
-const AuthRoute = require('./routes/auth')
-app.use(express.json())
-app.use('/auth', AuthRoute)
-app.get('/ping', (req, res) => {
-    res.send("🏀 pong.")
-})
-mongoose.connect('mongodb://127.0.0.1:27017/reusic')
+dotenv.config();
+const app = express();
+const AuthRoute = require("./routes/auth");
+const MusicRoute = require("./routes/music");
+app.use(express.json());
+app.use(cors());
+app.use("/auth", AuthRoute);
+app.use("/music", MusicRoute);
+app.get("/ping", (req, res) => {
+    res.send("🏀 pong.");
+});
+const PORT = process.env.PORT || 5000;
+mongoose
+    .connect(process.env.MONGO_CONNECTION_STRING)
     .then(() => {
-        app.listen(5000, () => {
-            console.log('listing at  5000');
-        })
-    }).catch((err) => {
-        console.log("MONGO err=> ", err);
+        app.listen(PORT, () => {
+            console.log("listing at " + PORT);
+        });
     })
+    .catch((err) => {
+        console.log("MONGO err=> ", err);
+    });
