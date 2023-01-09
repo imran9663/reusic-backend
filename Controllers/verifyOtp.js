@@ -1,4 +1,4 @@
-
+const jwt = require('jsonwebtoken');
 const OtpModel = require('../models/otp');
 const UserModel = require('../models/user');
 
@@ -10,7 +10,8 @@ const verifyOtp = async (req, res) => {
             if (getOtpFromDb.otp === otp) {
                 await UserModel.updateOne({ email: email }, { verified: true })
                 await OtpModel.findOneAndDelete({ email: email })
-                return res.status(200).json({ msg: 'Otp verificstion Scuccess' });
+                const token = jwt.sign({ email: email }, process.env.SECRET_KEY)
+                return res.status(200).json({ msg: 'Otp verificstion Scuccess', token: token });
             }
             return res.status(400).json({ msg: 'invalid OTP' });
         }
