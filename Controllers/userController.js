@@ -6,7 +6,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 const registerUser = async (req, res) => {
   //token gen
-  const { fullName, email, confirmPassword } = req.body;
+  const { fullName, email, Password } = req.body;
   try {
     // checking existinguser
     const existingUser = await userModel.findOne({ email: email });
@@ -16,7 +16,7 @@ const registerUser = async (req, res) => {
       });
     }
     //genratng hashed password
-    const hashedPassword = await bcrypt.hash(confirmPassword, 10);
+    const hashedPassword = await bcrypt.hash(Password, 10);
 
     // creating  user
     const createUser = await userModel.create({
