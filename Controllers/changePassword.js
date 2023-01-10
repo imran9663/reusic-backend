@@ -2,8 +2,6 @@ const jwt = require('jsonwebtoken');
 const UserModel = require('../models/user');
 const bcrypt = require('bcrypt');
 
-
-
 const changePassword = async (req, res) => {
     const { token, newPassword } = req.body;
     const result = jwt.verify(token, process.env.SECRET_KEY);

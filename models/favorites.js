@@ -10,7 +10,7 @@ const FavoriteSchema = mongoose.Schema({
     },
     data: {
         type: Array,
-        require: true,
+        req: true,
     }
 }, { timestamps: true })
 
