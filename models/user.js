@@ -17,6 +17,10 @@ const UserSchema = mongoose.Schema({ //with the help of mongoose.Schema({})
         type: String,
         require: true
     },
+    verified: {
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true });
 module.exports = mongoose.model(constants.user, UserSchema) // exporting the schema with mongoose.model('propety','value')
 
