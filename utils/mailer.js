@@ -11,7 +11,6 @@ async function mailer (to, subject, toTextBody, toHtmlBody) {
                 pass: process.env.SMTP_PASSWORD
             }
         });
-        console.log("args==>", to, subject, toTextBody, toHtmlBody);
 
         let info = await transporter.sendMail({
             from: '"reusic 👻" <noreply.reusic@gmail.com>', // sender address

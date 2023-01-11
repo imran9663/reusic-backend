@@ -43,7 +43,7 @@ const registerUser = async (req, res) => {
       // const saveOtpObject = await createOtpObject.save()
       return res.status(201).json({
         msg: 'OTP sent to your Email id',
-        otp: OTP,
+
       });
     }
     else {
