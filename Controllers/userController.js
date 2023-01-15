@@ -34,7 +34,6 @@ const registerUser = async (req, res) => {
     // sending otp to mail
     const node_mailer = await mailer(email, "OTP VERIFICATION", `hi your OTP - ${OTP} for  ${email}`, html)
     // saving the OTP to otpModel if the message id exists
-    console.log("node_mailer?.messageId", node_mailer?.messageId);
     if (node_mailer?.messageId) {
       const createOtpObject = OtpModel.create({
         email: email,
@@ -43,7 +42,6 @@ const registerUser = async (req, res) => {
       // const saveOtpObject = await createOtpObject.save()
       return res.status(201).json({
         msg: 'OTP sent to your Email id',
-
       });
     }
     else {
