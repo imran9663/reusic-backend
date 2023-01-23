@@ -6,11 +6,12 @@ const setLanguage = async (req, res) => {
     try {
         const profileInfo = await UserModel.findOneAndUpdate(
             { userId: userId },
-            { language: languages },
-            { returnNewDocument: true }
+            { $set: { language: languages } },
+            { returnOriginal: false }
         );
         if (profileInfo) {
-            return res.status(200).json({ msg: "data added Success", data: profileInfo });
+            const { password, ...rest } = profileInfo._doc
+            return res.status(200).json({ msg: "data added Success", data: rest });
         }
         return res.status(500).json({ msg: 'someting went worng' });
     } catch (error) {

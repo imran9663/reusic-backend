@@ -1,7 +1,7 @@
 const express = require('express');
 const { verifyToken } = require('../middleware/verifyToken');
 const { getRecentMusic, addToRecentMusic } = require('../Controllers/recentMusicControllers');
-const { getFavoriteTracks, addToFavoriteTracks } = require('../Controllers/favoriteMusicController');
+const { getFavoriteTracks, addToFavoriteTracks, removeFromFavorites } = require('../Controllers/favoriteMusicController');
 const { getAllArtists, addToAllArtists } = require('../Controllers/allArtists');
 const { setLanguage } = require('../Controllers/selectedLanguage');
 
@@ -12,6 +12,7 @@ route.post('/recentlyPlayed', verifyToken, addToRecentMusic);
 
 route.get('/favorites', verifyToken, getFavoriteTracks);
 route.post('/favorites', verifyToken, addToFavoriteTracks);
+route.delete('/favorites/:songId', verifyToken, removeFromFavorites);
 
 route.get('/allartists', verifyToken, getAllArtists);
 route.post('/allartists', verifyToken, addToAllArtists);
