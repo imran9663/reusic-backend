@@ -10,7 +10,8 @@ const route = express.Router();
 route.get('/recentlyPlayed', verifyToken, getRecentMusic);
 route.post('/recentlyPlayed', verifyToken, addToRecentMusic);
 
-route.get('/favorites', verifyToken, getFavoriteTracks);
+// route.get('/favorites', verifyToken, getFavoriteTracks);
+route.get('/favorites/:userId', getFavoriteTracks);
 route.post('/favorites', verifyToken, addToFavoriteTracks);
 route.delete('/favorites/:songId', verifyToken, removeFromFavorites);
 

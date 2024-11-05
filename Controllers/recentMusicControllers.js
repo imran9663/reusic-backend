@@ -14,7 +14,6 @@ const getRecentMusic = async (req, res) => {
 }
 
 const addToRecentMusic = async (req, res) => {
-    console.log("req.body.data.id===>", req.body.data.id);
     const { userId } = req
     try {
         const getRecentMusicData = await MusicModel.findOne({ userId: userId })
@@ -25,12 +24,10 @@ const addToRecentMusic = async (req, res) => {
                 return res.status(200).json({ msg: 'Track already Present' });
             } else {
                 const result = await MusicModel.updateOne({ userId: userId }, { data: [...data, req.body.data] });
-                console.log("result", result);
                 return res.status(200).json({ msg: 'data added Success' });
             }
         } else {
             const { data } = req.body
-            console.log("add to recentmusic data", data);
             const newList = new MusicModel({
                 userId: userId,
                 data: [data],
