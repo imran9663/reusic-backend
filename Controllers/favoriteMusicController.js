@@ -1,6 +1,6 @@
 const FavoriteModel = require('../models/favorites');
 const getFavoriteTracks = async (req, res) => {
-    const { userId } = req;
+    const { userId } = req.params;
     try {
         const getFavoriteTracksData = await FavoriteModel.findOne({ userId: userId });
         if (getFavoriteTracksData) {
