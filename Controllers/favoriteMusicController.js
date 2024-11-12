@@ -8,7 +8,7 @@ const getFavoriteTracks = async (req, res) => {
         }
         return res.status(201).json({ msg: 'No Data Found', data: [] });
     } catch (error) {
-        return res.status(500).json({ msg: 'someting went worng' });
+        return res.status(500).json({ msg: 'Something  went Wrong' });
     }
 }
 
@@ -37,7 +37,7 @@ const addToFavoriteTracks = async (req, res) => {
 
     } catch (error) {
         console.log("addToFavoriteTracks error==>", error);
-        return res.status(500).json({ msg: 'someting went worng' });
+        return res.status(500).json({ msg: 'Something  went Wrong' });
     }
 }
 const removeFromFavorites = async (req, res) => {
@@ -55,7 +55,7 @@ const removeFromFavorites = async (req, res) => {
         }
     } catch (error) {
         console.log("getFavoriteTracksData err==>", error);
-        return res.status(500).json({ msg: 'someting went worng' });
+        return res.status(500).json({ msg: 'Something  went Wrong' });
     }
 }
 
