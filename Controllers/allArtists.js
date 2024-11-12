@@ -10,7 +10,7 @@ const getAllArtists = async (req, res) => {
             .status(200)
             .json({ msg: "data added Success", data: artists });
     } catch (error) {
-        return res.status(500).json({ msg: "someting went worng" });
+        return res.status(500).json({ msg: "Something  went Wrong" });
     }
 };
 const addToAllArtists = async (req, res) => {
@@ -30,7 +30,7 @@ const addToAllArtists = async (req, res) => {
             return res.status(200).json({ msg: "data added Success" });
         } catch (error) {
             console.log("addtoArtist->if->error", error);
-            return res.status(500).json({ msg: "someting went worng" });
+            return res.status(500).json({ msg: "Something  went Wrong" });
         }
     }
     else {
@@ -46,7 +46,7 @@ const addToAllArtists = async (req, res) => {
             return res.status(200).json({ msg: "Artist added Success" });
         } catch (error) {
             console.log("addtoArtist->else->error", error);
-            return res.status(500).json({ msg: "someting went worng" });
+            return res.status(500).json({ msg: "Something  went Wrong" });
         }
     }
 

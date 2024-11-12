@@ -45,11 +45,11 @@ const registerUser = async (req, res) => {
       });
     }
     else {
-      return res.status(500).json({ msg: "someting went worng while sending the mail" });
+      return res.status(500).json({ msg: "Something  went Wrong while sending the mail" });
     }
   } catch (error) {
     console.log("error ==>", error);
-    return res.status(500).json({ msg: "someting went worng" });
+    return res.status(500).json({ msg: "Something  went Wrong" });
   }
 };
 
@@ -69,7 +69,7 @@ const signinUser = async (req, res) => {
     const macthPassword = await bcrypt.compare(Password, existingUser.password);
     if (!macthPassword) {
       return res.status(400).json({
-        msg: "Invalid Credemtials",
+        msg: "Invalid Credentials",
       });
     }
     const token = jwt.sign(
@@ -83,7 +83,7 @@ const signinUser = async (req, res) => {
     });
   } catch (error) {
     console.log("error ==>", error);
-    return res.status(500).json({ msg: "someting went worng" });
+    return res.status(500).json({ msg: "Something  went Wrong" });
   }
 };
 

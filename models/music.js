@@ -10,6 +10,6 @@ const MusicSchema = mongoose.Schema({
     data: {
         type: Array,
         require: true
-    }
+    }, createdAt: { type: Date, default: Date.now, expires: "15d" },
 }, { timestamps: true })
 module.exports = mongoose.model(constants.music, MusicSchema);

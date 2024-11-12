@@ -12,7 +12,7 @@ const changePassword = async (req, res) => {
         return res.status(200).json({ msg: 'Password update success' });
     } catch (error) {
         console.log("changePassword error ==>", error);
-        return res.status(500).json({ msg: 'someting went worng' });
+        return res.status(500).json({ msg: 'Something  went Wrong' });
     }
 }
 module.exports = { changePassword }

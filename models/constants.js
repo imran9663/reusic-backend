@@ -3,6 +3,7 @@ const constants = {
     music: 'MUSIC',
     favorites: 'FAVORITES',
     otp: 'OTP',
-    artists: 'ARTISTS'
+    artists: 'ARTISTS',
+    playlist: 'PLAYLIST'
 }
 module.exports = constants;
