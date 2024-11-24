@@ -5,7 +5,7 @@ const UserModel = require('../models/user');
 const verifyOtp = async (req, res) => {
     const { otp, email } = req.body
     try {
-        const getOtpFromDb = await OtpModel.findOne({ email: email })
+        const getOtpFromDb = await OtpModel.findOne({ email: email });
         if (getOtpFromDb) {
             if (getOtpFromDb.otp === otp) {
                 await UserModel.updateOne({ email: email }, { verified: true })
