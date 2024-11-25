@@ -3,7 +3,7 @@ const { getRecentMusic, addToRecentMusic } = require('../Controllers/recentMusic
 const { getFavoriteTracks, addToFavoriteTracks, removeFromFavorites } = require('../Controllers/favoriteMusicController');
 const { getAllArtists, addToAllArtists } = require('../Controllers/allArtists');
 const { setLanguage } = require('../Controllers/selectedLanguage');
-const { getAllPlayListsByUser, createPlayListByUser, addTrackToThePlayListById, removeTrackFromPlaylistByTrackId, deletePlayListByPlayListId } = require('../Controllers/playlist');
+const { getAllPlayListsByUser, createPlayListByUser, addTrackToThePlayListById, removeTrackFromPlaylistByTrackId, deletePlayListByPlayListId, getPlayListsByPlayListId } = require('../Controllers/playlist');
 
 const route = express.Router();
 
@@ -20,6 +20,7 @@ route.post('/setLanguages', setLanguage);
 
 //  Playlist routes
 route.get('/getAllPlayListsByUser/:userId', getAllPlayListsByUser);
+route.get('/getPlayListsByPlayListId/:playlistId', getPlayListsByPlayListId);
 route.post('/createPlayListByUser', createPlayListByUser);
 route.post('/addTrackToThePlayListById', addTrackToThePlayListById);
 route.post('/removeTrackFromPlaylistByTrackId', removeTrackFromPlaylistByTrackId);

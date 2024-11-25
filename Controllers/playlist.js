@@ -7,7 +7,25 @@ const getAllPlayListsByUser = async (req, res) => {
         if (allPlayList !== null) {
             return res
                 .status(200)
-                .json({ msg: "data added Success", data: allPlayList });
+                .json({ msg: "Success", data: allPlayList });
+        } else {
+            return res.status(404).json({ msg: "No Data Found" });
+        }
+    } catch (error) {
+        return res.status(500).json({ msg: "something went wrong" });
+    }
+};
+const getPlayListsByPlayListId = async (req, res) => {
+    const { playlistId } = req.params;
+    try {
+        const allPlayList = await PlayListModel.findOne(
+            { "playlists.playlistId": playlistId },
+            { "playlists.$": 1, createdBy: 1, createdAt: 1, userId: 1 }
+        );
+        if (allPlayList !== null) {
+            return res
+                .status(200)
+                .json({ msg: "Success", data: allPlayList });
         } else {
             return res.status(404).json({ msg: "No Data Found" });
         }
@@ -28,23 +46,22 @@ const createPlayListByUser = async (req, res) => {
             { upsert: true }
         );
         if (!addPlaylist) {
-            return res.status(400).json({ msg: 'unable to add new playlist ' });
+            return res.status(400).json({ msg: "unable to add new playlist " });
         }
-        return res.status(200).json({ msg: 'data added Success' });
+        return res.status(200).json({ msg: "data added Success" });
     } catch (error) {
-        return res.status(500).json({ msg: 'something went wrong ❌', error });
+        return res.status(500).json({ msg: "something went wrong ❌", error });
     }
-
 };
 const addTrackToThePlayListById = async (req, res) => {
     const { userId, playlistId, trackData } = req.body;
     try {
         const updatePlayList = await PlayListModel.findOneAndUpdate(
-            { userId: userId, "playlists.playlistId": playlistId, },
+            { userId: userId, "playlists.playlistId": playlistId },
             { $push: { "playlists.$.playListData": trackData } }
         );
         if (!updatePlayList) {
-            return res.status(400).json({ msg: '❌ Failed to add in Playlist' });
+            return res.status(400).json({ msg: "❌ Failed to add in Playlist" });
         }
         return res.status(200).json({ msg: " ✔ Track added to PlayList" });
     } catch (error) {
@@ -58,17 +75,18 @@ const removeTrackFromPlaylistByTrackId = async (req, res) => {
     const { userId, playlistId, trackId } = req.body;
     try {
         const deleteTrack = await PlayListModel.findOneAndUpdate(
-            { userId, 'playlists.playlistId': playlistId },
+            { userId, "playlists.playlistId": playlistId },
             { $pull: { "playlists.$.playListData": { id: trackId } } }
-        )
+        );
         if (!deleteTrack) {
-            return res.status(400).json({ msg: '❌ Failed to Remove Track From Playlist' });
+            return res
+                .status(400)
+                .json({ msg: "❌ Failed to Remove Track From Playlist" });
         }
-        return res.status(200).json({ msg: 'Track removed from Playlist ' });
+        return res.status(200).json({ msg: "Track removed from Playlist " });
     } catch (error) {
-        return res.status(500).json({ msg: 'something went wrong ❌', error });
+        return res.status(500).json({ msg: "something went wrong ❌", error });
     }
-
 };
 const deletePlayListByPlayListId = async (req, res) => {
     const { userId, playlistId } = req.body;
@@ -76,18 +94,18 @@ const deletePlayListByPlayListId = async (req, res) => {
         const removePlaylist = await PlayListModel.findOneAndUpdate(
             { userId: userId },
             {
-                $pull: { "playlists": { playlistId: playlistId } },
+                $pull: { playlists: { playlistId: playlistId } },
             }
         );
         console.log("removePlaylist", removePlaylist);
 
         if (removePlaylist === null) {
-            return res.status(400).json({ msg: 'Error while removing play list' });
+            return res.status(400).json({ msg: "Error while removing play list" });
         }
-        return res.status(200).json({ msg: 'Playlist removed Success' });
+        return res.status(200).json({ msg: "Playlist removed Success" });
     } catch (error) {
         console.log("deletePlayListByPlayListId error ==>", error);
-        return res.status(500).json({ msg: 'something went wrong ❌', error });
+        return res.status(500).json({ msg: "something went wrong ❌", error });
     }
 };
 module.exports = {
@@ -96,4 +114,5 @@ module.exports = {
     addTrackToThePlayListById,
     removeTrackFromPlaylistByTrackId,
     deletePlayListByPlayListId,
+    getPlayListsByPlayListId,
 };
